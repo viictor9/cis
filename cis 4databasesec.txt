@@ -3,9 +3,9 @@ Aim: To implement Database Security: Fragmentation
 1. Open Net Configuration Assistant. Click on yes to launch the executable file.
 2. Select Local Net Service Name Configuration option and click on Next.
 3. Select Add and click on Next.
-4. Enter service name as ‘mscit’ click on Next.
+4. Enter service name as â€˜mscitâ€™ click on Next.
 5. Select TCP and click on Next.
-6. Give Hostname as ‘itprojector’ and click on Next.
+6. Give Hostname as â€˜itprojectorâ€™ and click on Next.
 7. Now click on Next to continue with the default selected options until finish
 option is available.
 8. Net Service configuration is created. Click on Next.
@@ -24,7 +24,7 @@ Host string: mscit (service name entered earlier)
 node2.
 a)Vertical Fragmentation
 Vertical Fragmentation: Horizontal fragmentation and vertical fragmentation are
-used to create the fragments of the tables. Vertical fragmentation – In vertical fragmentation, we
+used to create the fragments of the tables. Vertical fragmentation â€“ In vertical fragmentation, we
 use the attributes (column ) to divide the database into fragments.
 At node1:
 

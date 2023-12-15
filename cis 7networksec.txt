@@ -1,1 +1,201 @@
+Select, the Ethernet option to capture packets on the Ethernet.
+Wireshark automatically starts capturing. Click on stop button to stop the capturing of the data packets.
+Inspect the traffic for specific IP address
+Open cmd and type the ipconfig command to get the ip address of the machine.
+Now filter all the packets for the machines ip address. Filter used: ip.addr ==  192.168.2.75
+Filter used: ip.addr == 192.168.2.24
+Sniff the credentials details from vulnerable website
+Filter used: http.request.method==post
 
+Visit any vulnerable website like the following website.
+http://testphp.vulnweb.com/login.php
+Click on start capturing packets in wireshark.
+Click on continue without saving.
+Packet capturing starts.
+Now go to the website and login with credentials.
+Come to wireshark again and click on stop capturing.
+Apply the filter.
+Here, the packets with request method as POST are displayed.
+Right click on packet and select follow -> TCP stream.
+Here the username and password is visible. Also in the HTML Form url section of a packet the username and passwords are visible.
+Find out the packets which gets Page Not Found response
+Filter used: http.response.code == 404 Output:
+Start wireshark capturing
+visit any url which returns 404 status code
+http://testphp.vulnweb.com/logins.php
+Stop capturing in wireshark
+Apply filter.
+Find out the packet which gets response Filter used: http.response.code ==200 Output:
+Start capturing in wireshark
+Visit any website and open some pages on the website. OR
+Enter the following site.
+http://testphp.vulnweb.com/categories.php
+Stop capturing
+Apply filter
+Find out the packets in which url contains “testphp” as substring
+Filter used: http.referer contains “testphp” Output:
+Start capturing
+Visit the website
+http://testphp.vulnweb.com/cart.php
+Stop capturing
+Apply filter.
+Find out browser specific packets
+Filter used: http.user_agent contains Chrome Output:
+Start capturing
+Visit a site in chrome
+Apply filter.
+Find out packets which reveal what user has typed in Google Search Engine.
+Filter used: ip.addr == 192.168.2.232 && nbns Output:
+Start wireshark capture.
+Open Microsoft edge and visit any site. Stop capture.
+Apply filter.
+Display DoS attack by ping command
+Filter used: icmp or no filter Output:
+Start wireshark capture
+Open cmd and enter ping -t domain name or ip address command
+Here -t option of the ping command ensures continuously packets are sent to the domain. I.e. The dos attack is mimicked here.
+Ping continuously
+Stop wireshark capture.
+Here, we can see continuous echo request and reply packets are generated.
+Apply icmp filter. icmp is the protocol.
+9) Display Conversation between Client and Server.
+Filter used: tcp.port == 8080
+Output:
+Open wireshark again and select Adapter for loopback interface capture and start capturing the packets for the computers internal communications or the intranet of the computer.
+Run server.py on one idle and client.py on another idle.
+Server.py
+#server.py
+import socket
+# next create a socket object
+s = socket.socket()
+print ('Socket successfully created')
+
+# reserve a port on your computer in our
+# case it is 12345 but it can be anything
+port = 8080
+# Next bind to the port
+# we have not typed any ip in the ip field
+# instead we have inputted an empty string
+# this makes the server listen to requests
+# coming from other computers on the network
+s.bind(('localhost', port))
+print ('socket binded to %s' %(port))
+# put the socket into listening mode
+s.listen(5)
+print ("socket is listening")
+# a forever loop until we interrupt it or
+# an error occurs
+while True:
+    # Establish connection with client.
+    c, addr = s.accept()
+    print ('Got connection from', addr)
+    # send a thank you message to the client.
+    c.sendall('Thank you for connecting'.encode())
+    # Close the connection with the client
+    c.close()
+Client.py
+#Client Side
+import socket
+# Create a socket object
+s = socket.socket()
+# Define the port on which you want to connect
+port = 8080
+# connect to the server on local computer
+s.connect(('localhost', port))
+# receive data from the server
+print (s.recv(1024).decode())
+# close the connection
+s.close()
+stop capture and apply filter.
+Right click on the last packet and select follow -> TCP stream option
+
+Server.py
+
+#server side
+import socket
+# next create a socket object
+s = socket.socket()
+print ('Socket successfully created')
+
+# reserve a port on your computer in our
+# case it is 12345 but it can be anything
+port = 8080
+# Next bind to the port
+# we have not typed any ip in the ip field
+# instead we have inputted an empty string
+# this makes the server listen to requests
+# coming from other computers on the network
+s.bind(('192.168.1.106', port))
+print ('socket binded to %s' %(port))
+# put the socket into listening mode
+s.listen(5)
+print ("socket is listening")
+# a forever loop until we interrupt it or
+# an error occurs
+while True:
+    # Establish connection with client.
+    c, addr = s.accept()
+    print ('Got connection from', addr)
+    # send a thank you message to the client.
+    c.sendall('Thank you for connecting'.encode())
+    # Close the connection with the client
+    c.close()
+
+Client.py
+
+#Client  side
+import socket
+# Create a socket object
+s = socket.socket()
+# Define the port on which you want to connect
+port = 8080
+# connect to the server on local computer
+s.connect(('192.168.1.106', port))
+# receive data from the server
+print (s.recv(1024).decode())
+# close the connection
+s.close()
+stop capture and apply filter.
+
+Right click on the last packet and select follow -> TCP stream option. 
+
+10) Find packets related to specific Source and destination
+Filter used: ip.addr == some ip address && ip.addr == some ipaddress. (here, both ip addresses can either be source or destination)
+Another filter to check packets between a specific source and destination
+Filter used: ip.src == 192.168.76.104 && ip.dst == 192.168.76.6
+Output:
+
+DoS attack using ColaSoft:-
+Use Colasoft packet builder software
+1. Download colasoft packet builder from the following website.
+https://www.colasoft.com/download/products/download_packet_builder.php 
+2. Extract the zip file.  
+3. Click on Extract.
+4. Click on the exe file.
+5. Select I accept the terms and conditions and click on Next.
+6. Click on Next.
+7. Give path or continue with the default path of installation and click on Next.
+8. Give start menu folder name or continue with the default start menu folder name and click on Next.
+9. Click on Next.
+10. Click on Install.
+11. Click on Next.
+12. Click on Finish.
+13. Open Colasoft Packet Builder.
+14. Click on Add.
+15. Select TCP packet and click on ok.
+All the information of packet is displayed.
+16. Find ip address of the machine with the ipconfig command.
+17. Make use of any other machine in network with the current machine. Either a LAN connection or wireless connection.
+Here, as we are in wireless connection with mobile. We get the ip address of mobile. Else the ip address of machine with which this computer is in LAN is taken.
+For mobile , Go to setting -> ipaddress or setting – status information-> ip address.
+18. Now, change the source ip address of the tcp packet to the host machine’s ip address and the destination ip address to the destination machine’s ip address
+19. Now add one more ARP packet. Click on Add.
+20. Select ARP as template and click on ok.
+21. start capturing in wireshark.
+22. Right click in the right panel and select send all packets or click on send all button at the top.
+23. Click on select.
+23. Select the adapter which has the source ip addresses as its ip address. Here Microsoft adapter is selected. Click on ok to continue.
+24. Select Burst mode and loop sending. Give loops as 1000 and delay between loops as 0.1 millisecond.
+25. stop wireshark capturing.
+Filter used: ip.addr == 192.168.76.104 && ip.addr == 192.0.0.2
+Output:

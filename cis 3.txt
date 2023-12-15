@@ -1,0 +1,142 @@
+PRACTICAL NO:3
+
+Aim:- Security Practices that include:-
+A) Error Handling/Error Log
+B) Creating Process Logs
+C)Data Backup &amp; Recovery
+1.CODE:
+import logging
+def error_logging():
+f = open(&quot;C:\\errorLogs.txt&quot;, &quot;a&quot;)
+
+def error_NameError(): try:
+print(&quot;value of a&quot;,a)
+except NameError as namelog:
+logging.error(&quot;Error occured: ValueError has occured...&quot;) print(&quot;NameError Logged&quot;)
+f.write(&quot;1. Name Error\n&quot;+str(namelog))
+
+def error_ModuleNotFoundError(): try:
+import abcmodule
+except ModuleNotFoundError as modulelog:
+logging.error(&quot;Error occured: ModuleNotFoundError has occured...&quot;) print(&quot;ModuleError Logged&quot;)
+f.write(&quot;\n\n2. Module Error\n&quot;+str(modulelog))
+
+def error_IndexError(): var_list=[3,1,2]
+try:
+print(var_list[5])
+except IndexError as indexlog:
+logging.error(&quot;Error occured: IndexError has occured, invalid list indexing...&quot;) print(&quot;IndexError
+Logged&quot;)
+f.write(&quot;\n\n3. Index Error\n&quot;+str(indexlog))
+
+def error_ZeroDivisionError(): try:
+C=3/0
+except ZeroDivisionError as zerodivlog:
+logging.error(&quot;Error occured: ZeroDivisionError has occured...&quot;) print(&quot;ZeroDivisionError
+Logged&quot;)
+f.write(&quot;\n\n4. Zero Division Error\n&quot;+str(zerodivlog))
+
+def error_KeyError():
+var_dict={1:&quot;A word&#39;, 2:&#39;Another word&quot;} try:
+var_dict[3]
+except KeyError as keylog:
+logging.error(&quot;Error occured: KeyError has occured...&quot;) print(&quot;KeyError Logged&quot;)
+f.write(&quot;\n\n5. Key Error\n&quot;+str(keylog))
+def error_TypeError():
+try:
+d=3+&#39;3&#39;
+except TypeError as typelog:
+logging.error(&quot;Error occured: TypeError has occured...&quot;) print(&quot;TypeError Logged&quot;)
+f.write(&quot;\n\n6. Type Error\n&quot;+str(typelog))
+def error_KeyboardInterrupt(): try:
+while True:
+print(3)
+except KeyboardInterrupt as keyboardinterruptlog:
+logging.error(&quot;Error occured: KeyboardInterrupt has occured...&quot;) print(&quot;Keyboardinterrupt
+Logged&quot;)
+f.write(&quot;\n\n7. Keyboard Interrupt Error\n&quot;+str(keyboardinterruptlog)
+def critical_error():
+
+list_size=536870912 if list_size&gt;100:
+logging.critical(&quot;Critical Error occured: Huge resouces requested, cannot provided so much
+memory for list...&quot;)
+print(&quot;critical_error Logged&quot;) f.write(&quot;\n\n8. Critical Error&quot;)
+else:
+#creating a list with all 0 elements var_list=[]
+for i in range(list_size): var_list.append(0)
+#level-logging.DEBUG has lowest prority so it will log debug,info, warning,etc
+logging.basicConfig(filename=&quot;LogFile.log&quot;,level=logging.DEBUG, filemode=&#39;w&#39;,\
+format=&#39;Time: %(asctime)s - Name: %(name)s - FilePath: -
+%(pathname)s \ - FunctionName: %(funcName)s - LevelName:%(levelname)s -
+Message:%(message)s\ -Line Number: -%(lineno)d - ProcessID:%(process)d - ThreadID:
+%(thread)d&#39;)
+logging.debug(&quot;Executing code and logging errors if any...&quot;)
+logging.warning(&quot;Error expected in multiple functions to be tested&quot;) logging.info(&quot;Program has
+started...&quot;)
+error_NameError()
+error_ModuleNotFoundError() error_IndexError()
+error_ZeroDivisionError() error_KeyError()
+error_TypeError()
+error_KeyboardInterrupt() critical_error()
+error_logging()
+
+
+
+
+2.CODE:-
+package com.mycompany.Processlog;
+
+import java.io.FileWriter;
+public class Processlog
+{
+public static void main(String[] args)
+{
+try
+{
+String cmd=&quot;WMIC /OUTPUT: E:\\Viraj_workspace\\CIS\\list.html
+getname,processid,creationdate /format:hform&quot;;?
+FileWriter fos = new FileWriter(&quot;E:\\Viraj_workspace\\CIS\\mycmd.bat&quot;);
+System.out.println(&quot;File created&quot;);
+fos.write(cmd);
+fos.close();
+Runtime rt = Runtime.getRuntime();
+rt.exec(&quot;cmd.exe /e start &quot;E:\\Viraj_workspace\\CIS\\mycmd.bat&quot;);
+}
+catch (Exception e)
+{
+e.printStackTrace();
+}
+}
+
+}
+
+
+
+
+3.CODE:-
+? Backup Code:-
+
+import os
+def backup(path,user,dbname,backuppath,filename):
+cmd = &quot;mysqldump -u &quot; + user + &quot; -p &quot; + dbname + &quot; &gt; &quot; + backuppath +
+filename os.chdir(path)
+os.system(cmd)
+print(&quot;Database Backup Sucessful!&quot;) #print(cmd)
+path=input(&quot;Enter the Mysql Path:&quot;) user=input(&quot;Enter the Username:&quot;)
+dbname=input(&quot;Enter the Database name: &quot;) backuppath=input(&quot;Enter the
+Backup Path:&quot;) filename=input(&quot;Enter the Backup Name:&quot;)
+backup(path,user,dbname,backuppath,filename)
+
+
+
+Restore CODE:-
+import os
+def backup(path,user,dbname,backuppath,filename):
+cmd = &quot;mysql -u &quot; + user + &quot; -p &quot; + dbname + &quot; &lt; &quot; + backuppath + filename os.chdir(path)
+
+os.system(cmd) print(cmd)
+print(&quot;Database Restore Completed!&quot;) path=input(&quot;Enter mysql path: &quot;)
+user=input(&quot;Enter Username: &quot;)
+dbname=input(&quot;Enter Database Name: &quot;)
+backuppath=input(&quot;Enter Backup Path: &quot;) filename=input(&quot;Enter Filename:&quot;)
+backup(path,user,dbname,backuppath,filename)

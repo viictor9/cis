@@ -1,0 +1,53 @@
+PRACTICAL NO:5
+
+Aim:- Cloud Security using Google Firebase.
+
+1) Go To Firebase (google.com)  >  Click Create a project.
+2) Create New Project:- Enter Project Name =>; Next - Create Project.
+3) Select build => Firestore => Create Database
+4) Select the default and Next, Next.
+We have provisioned the Firestore Database. Moving to enabling the
+Authentication Service.
+5) Select Authentication => Get Started
+6) In Sign-In Methods: Select Email and Password Sign in Option and
+Enable it.
+7) Select Users => Add User. Let’s create a new entity for Author, Admin,
+User.
+Copy The UIDS (Will be used in Database/collections)
+8) Go To Firestore Database =>; Start Collection
+9) Create Collection – Users
+10) Create 3 Users (user, author , admin) with type attribute for each. The
+document ID for each user will be their UID obtained from authentication.
+Select Add Document for user
+Add Administrator.
+Similarly, Add Author.
+11) Similarly Start another collection - Blogs. Follow below screenshots. UID
+value will be the author user UID.
+Here, for document ID click auto-ID.
+Add the blog document &amp; fill details.
+
+Applying Firestore Rules
+1) Go to RULES section.
+service cloud.firestore {
+match
+/databases/{database}/docum
+ents { match /&lt;some_path&gt;/
+{
+allow read, write: if &lt;some_condition&gt;;
+}}
+}
+
+&lt;some_path&gt;
+Is the path of the collection or document.
+To Match all sub-collections use {document=**}.
+
+Enforcing Rules:-
+1) Blog Documents
+a) Everyone can Read
+b) Only Author of the Blog can edit the content
+
+c) Only Authenticated entities can comment
+d) Blog can be deleted by either Author or Administrator only
+
+
+

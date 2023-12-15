@@ -1,0 +1,38 @@
+PRACTICAL NO:2
+
+Aim: To implement JWT Authentication.
+CODE:
+from flask import Flask
+from flask_jwt import JWT,jwt_required,current_identity
+from werkzeug.security import safe_str_cmp
+class User(object):
+def __init__(self,id,username,password):
+self.id=id
+self.username=username
+self.password=password
+def __str__(self):
+return&quot;User(id=&#39;%s&#39;)&quot;%self.id
+users=[
+
+User(1,&#39;user1&#39;,&#39;hello1&#39;),
+User(2,&#39;user2&#39;,&#39;hello2&#39;),
+]
+username_table={u.username:u for u in users}
+userid_table={u.id: u for u in users}
+def authenticate(username,password):
+user=username_table.get(username,None)
+if user and safe_str_cmp(user.password,password):
+return user
+def identity(payload):
+user_id=payload[&#39;identity&#39;]
+return userid_table.get(user_id,None)
+app=Flask(__name__)
+app.debug=True
+app.config[&#39;SECRET_KEY&#39;]=&#39;super-secret&#39;
+jwt=JWT(app,authenticate,identity)
+@app.route(&#39;/protected&#39;)
+@jwt_required()
+def protected():
+return&#39;%s&#39;%current_identity
+if __name__==&#39;__main__&#39;:
+app.run()

@@ -11,11 +11,11 @@ Authentication Service.
 5) Select Authentication => Get Started
 6) In Sign-In Methods: Select Email and Password Sign in Option and
 Enable it.
-7) Select Users => Add User. Let’s create a new entity for Author, Admin,
+7) Select Users => Add User. Letâ€™s create a new entity for Author, Admin,
 User.
 Copy The UIDS (Will be used in Database/collections)
 8) Go To Firestore Database =>; Start Collection
-9) Create Collection – Users
+9) Create Collection â€“ Users
 10) Create 3 Users (user, author , admin) with type attribute for each. The
 document ID for each user will be their UID obtained from authentication.
 Select Add Document for user

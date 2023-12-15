@@ -1,0 +1,72 @@
+#include <Servo.h>
+
+int pos = 0;
+Servo servo_9;
+
+void setup()
+{
+  servo_9.attach(9, 500, 2500);
+  Serial.begin(9600);
+  pinMode(11, OUTPUT);
+  
+}
+
+void loop()
+{
+  int degree=0;
+  String password="";
+  String state="";
+  String og_password_servo="servo";
+  String og_password_led="led";
+  String state_on = "on";
+
+  Serial.println("Enter the password to access device"); 
+  while (Serial.available() == 0) { 
+  }
+   password = Serial.readString();
+   //Read the data the user has input
+
+  //----------------------------servo as password----------------------------------------------------------------------
+  if (password==og_password_servo){
+  Serial.println("Enter degree on which you want to rotate servo"); //Prompt User for Input
+  while (Serial.available() == 0) {  
+  }
+  
+   degree = Serial.parseInt();
+  
+  for (pos = 0; pos <= degree; pos += 1) {
+    servo_9.write(pos);
+    delay(15); // Wait for 15 millisecond(s)
+    
+  }
+  for (pos = degree; pos >= 0; pos -= 1) {
+    servo_9.write(pos);
+    delay(15); 
+  }
+  }
+  
+  //--------------------------------led as password------------------------------------------------------------
+   if (password==og_password_led){
+  Serial.println("Enter on or off"); //Prompt User for Input
+  while (Serial.available() == 0) {
+    
+  }
+     state = Serial.readString();
+  
+     if (state==state_on)
+     {
+  		digitalWrite(11, HIGH);
+     }
+     else
+     {
+     digitalWrite(11, LOW);
+     }
+   }
+  
+  //-------------password doesn't match-----------------------
+  if(password!=og_password_led && password!=og_password_servo){
+  Serial.println("----------Please enter a valid password----------");
+  }
+  
+  Serial.println("----------------------------------------------------------------");
+}

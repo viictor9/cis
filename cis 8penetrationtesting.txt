@@ -1,0 +1,98 @@
+P8 : Penetration testing
+(XSS and SQL attack)
+Aim: To perform and understand XSS and SQL injection attack using dvwa.
+DVWA Login
+1. Visit the following ip address and click on DVWA.
+Ip address: 192.168.2.2.
+2. Click on Create/Reset Database.
+3. Here, enter the username as admin and password as password. 
+4. Click on login.
+Performing XSS Attacks
+Security Level: Low
+1. Now go to DVWA Security and select security level as low and click on submit.
+2. Now go to XSS(Reflected) and execute the following commands to mimic various xss attacks.
+1. Send an alert message to the user.
+<script>alert("Your Data is at risk")</script>
+2. Show cookie session value of document.
+<script>alert(document.cookie)</script> 
+3. Redirect user to some malicious site.
+<script>window.location="http://testphp.vulnweb.com/login.php"</script>
+4. Create a script to extract the absolute URI of website.
+<script>alert(document.baseURI)</script>
+5. Show an error as hacked when try to accessed unknown image
+<img src=abc.jpeg onerror=alert("Hacked")>
+6. Find out the parent URL link of another website.
+<script>alert(document.referrer)</script>
+7. Create a script to resize a window.
+<script>new_window = window.open('’,’',height=200,width=400); new_window.resizeTo(800,800);</script>
+<script> new_window= window.open('', height=200, width=400); new_window.resizeTo(800,800);</script>
+8. Create a new frame that redirect to vulnerable website.
+<iframe src="http://testphp.vulnweb.com/"> </iframe>
+
+Security Level: Medium
+Go To DVWA Security and select Medium Security level and click on submit.
+1. Send an alert message to the user.
+<script>alert("YOUR DATA IS AT RISK")</script>
+
+Performing Sql injection
+
+Security Level : Low
+Go to DVWA security and change the security level to Low and click on submit. The security level will be updated.
+
+Security Level : Medium
+Go to DVWA security and change the security level to Medium and click on submit. The security level will be updated.
+
+Security Level : High
+Go to DVWA security and change the security level to High and click on submit. The security level will be updated.
+
+Security Level : Impossible
+Go to DVWA security and change the security level to Impossible and click on submit. The security level will be updated.
+
+(Cain and Abel)
+Aim: To perform Dictionary attack using Cain and Abel.
+Description:
+Installing Cain and Abel
+Download WinpCap
+1. Visit the following link and click on Install for Windows.
+https://www.winpcap.org/install/ 
+2. Click on Next to continue.
+3. Click on I Agree to agree terms and conditions.
+4. Click on Install to start installation process.
+5. Installation is complete. Click on Finish.
+Changing some settings
+1. Turn off all the firewalls 
+Download Cain and Abel.
+1. Visit the following website and click on download to download Cain and Abel.
+https://web.archive.org/web/20160214132154/http://www.oxid.it/cain.html 
+3. In virus and threat protection, go to protection history. 
+4. Look for threat blocked history records and in the threat blocked for file ca._setup.exe, click on Actions and select Allow. 
+5. The setup file will be visible in downloads, click on it to install Cain and Abel.
+6. Click on more info and click on Run anyway option.
+7. Click on Next.
+8. License Agreement is visible. Click on Next.
+9. Click on Next to continue with the default given name of the program manager group.
+10. Cain and Abel is ready to install. Click on Next to start installation.
+11. Installation is complete. Click on Finish.
+12. Click on don’t install. Cain and Abel might close down.
+13. Open Cain and Abel again if it closes.
+Dictionary Attack
+Password cracked Case
+1. Click on Hash Calculator.
+2. Select Text to Hash and enter some text which will be converted to a hash value. Here, password text is entered and click on calculate to view its corresponding hash value.
+3. The hash value of the text using different hashing algorithms is visible. Select the hash value of md5 algorithm and right click on it and copy it. Paste it on Notepad for further use.
+4. Go to the Cracker tab and click on the MD5 Hashes(0) Cracker option.
+5. Click on anywhere in the white screen to enable the + or add to list button. Click on the Add to list button.
+6. Copy the MD5 pasted earlier on Notepad and paste it in the box and click on ok.
+7. The hash record appears. Now we will try to crack this hash value and retrieve the original password or text.
+8. To crack the hash value of this password we will use Dictionary Attack. Select the record and right click on it and select Dictionary Attack option.
+9. Right click on the Dictionary sub pane and select Add to list to add a wordlist for performing dictionary attack. 
+10. Select the default wordlist which comes with the Cain and Abel software. To do so go to the Cain and Abel path. C:\Program Files (x86)\Cain/ and go to the Wordlists directory and select the Wordlist.txt file and click on open.
+11. The wordlists.txt file’s path is visible This wordlist file will be used for dictionary attack. Click on start button to launch the dictionary attack.
+12. As the text or password was very common i.e. it was ‘password’ it could be easily cracked with dictionary attack. 
+Password not cracked case.
+Following the same steps but this time entering an uncommon password. Get the hash value from the Decoder tabs by clicking on the Add to list button and giving the password value.
+2. Copy the hash value and paste it in notepad.
+3. Go to the Cracker tab -> MD5 Cracker(0) option, click on Add to list button and paste the MD5 hash value from notepad. 
+4. Select the hash and right click and select Dictionary Attack. 
+5. Select the wordlist file if not selected and click on start to launch the dictionary attack.
+

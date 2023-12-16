@@ -108,27 +108,26 @@ error_logging()
 package com.mycompany.Processlog;
 
 import java.io.FileWriter;
-public class Processlog
-{
-public static void main(String[] args)
-{
-try
-{
-String cmd=&quot;WMIC /OUTPUT: E:\\Viraj_workspace\\CIS\\list.html
-getname,processid,creationdate /format:hform&quot;;?
-FileWriter fos = new FileWriter(&quot;E:\\Viraj_workspace\\CIS\\mycmd.bat&quot;);
-System.out.println(&quot;File created&quot;);
-fos.write(cmd);
-fos.close();
-Runtime rt = Runtime.getRuntime();
-rt.exec(&quot;cmd.exe /e start &quot;E:\\Viraj_workspace\\CIS\\mycmd.bat&quot;);
-}
-catch (Exception e)
-{
-e.printStackTrace();
-}
-}
+import java.io.IOException;
 
+public class Processlog {
+    public static void main(String[] args) {
+        try {
+            String cmd = "WMIC /OUTPUT:E:\\Viraj_workspace\\CIS\\list.html get name,processid,creationdate /format:hform";
+            
+            FileWriter fos = new FileWriter("E:\\Viraj_workspace\\CIS\\mycmd.bat");
+            System.out.println("File created");
+            fos.write(cmd);
+            fos.close();
+            
+            Runtime rt = Runtime.getRuntime();
+            rt.exec("cmd.exe /c start E:\\Viraj_workspace\\CIS\\mycmd.bat");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
 
 
